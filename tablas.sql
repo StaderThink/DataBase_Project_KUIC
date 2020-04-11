@@ -11,7 +11,7 @@ create table producto(
 	max_peso double not null,
 	magnitud enum('kg', 'gr', 'lb') not null,
 	presentacion enum('') not null, -- TODO
-	categoria int -- fk
+	categoria int not null-- fk
 );
 
 create table categoria(
@@ -35,7 +35,7 @@ create table usuario(
 	expedicion date not null,
 	correo text not null,
 	clave text not null,
-	cargo int, -- fk
+	cargo int , -- fk
 	telefono varchar(10) not null,
 	nacimiento date not null,
 	creado date not null default(curdate()),
@@ -79,6 +79,58 @@ create table detalle_entrada(
 	producto int not null, --fk
 );
 
--- TODO: entrada, detalle_entrada, salida, detalle_salida, pedido, detalle_pedido, estado, notificacion y segmento
+create table salida(
+	id int primary key auto_increment not null,
+	fecha datetime not null,
+	observacion text,
+	pedido int not null, --fk 
+);
 
--- TODO: restricciones
+create table detalle_salida (
+	id int primary key auto_increment not null,
+	cantidad int not null,
+	salida int not null, --fk
+	producto int not null, --fk
+);
+
+create table pedido(
+	id int primary key auto_increment not null,
+	fecha datetime not null,
+	cancelado bit, 
+	descuento double not null,
+	observacion text,
+	cliente int not null, --fk
+	asesor int not null, --fk usuario
+	estado int not null, --fk 
+);
+
+create table detalle_pedido(
+	id int primary key auto_increment not null,
+	cantidad int not null, 
+	pedido int not null, --fk
+	producto int not null, --fk
+);
+
+create table estado(
+	id int primary key auto_increment not null,
+	nombre text not null,
+	orden tinyint not null,
+	cancelable bit not null
+);
+
+create table notificacion(
+	id int primary key auto_increment not null,
+	texto text not null,
+	fecha_inicio datetime not null,
+	fecha_fin datetime,
+	autor int , --fk
+);
+
+create table segmento(
+	id int primary key auto_increment not null,
+	notificacion int not null, --fk
+	cargo int not null, --fk 
+);
+
+
+-- FALTA: restricciones
