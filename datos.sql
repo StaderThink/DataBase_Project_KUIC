@@ -1,17 +1,20 @@
+-- cargo
+
 insert into cargo (nombre, pedidos, usuarios, logistica, clientes, solicitar)
 values ('programador', true, true, true, true, true);
 
-insert into usuario(
-	nombre, apellido, documento, tipo_documento, expedicion, correo, clave, cargo, telefono, nacimiento, activo
-)
-values
-	('andres camilo', 'celis pacheco', '1000383837', 'CC', '22-09-2019', 'accelis73@misena.edu.co', md5('accelis'), 1, '3194028018', '22-09-2001', true);
+-- usuario
 
-insert into estado(nombre, orden, cancelable)
-values
-	('pendiente', 1, true),
-	('registrado', 2, true),
-	('empacado', 3, true),
-	('enviado', 4, false),
-	('en despacho', 5, false),
-	('entregado', 6, false);
+call crear_usuario(
+	'andres camilo', 'celis pacheco', '1000383837', 'CC', '22-09-2019',
+	'accelis73@misena.edu.co', 'accelis', 1, '3194028018', '22-09-2001'
+);
+
+-- estado
+
+call crear_estado('pendiente', 1, true);
+call crear_estado('registrado', 2, true);
+call crear_estado('empacado', 3, true);
+call crear_estado('enviado', 4, false);
+call crear_estado('en despacho', 5, false);
+call crear_estado('entregado', 6, false);
