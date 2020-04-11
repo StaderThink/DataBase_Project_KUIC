@@ -53,6 +53,19 @@ create table cargo(
 	solicitar boolean not null default(false)
 );
 
+create table cliente(
+	id int primary key auto_increment not null,
+	nombre text not null,
+	encargado text not null,
+	rut varchar(11), -- uq
+	correo text not null,
+	direccion text not null,
+	telefono varchar(10) not null,
+	creado date not null,
+	actualizado date not null,
+	activo boolean not null default(false)
+);
+
 -- TODO: cliente, entrada, detalle_entrada, salida, detalle_salida, pedido, detalle_pedido, estado, notificacion y segmento
 
 -- TODO: restricciones
