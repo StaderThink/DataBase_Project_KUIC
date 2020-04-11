@@ -66,6 +66,19 @@ create table cliente(
 	activo boolean not null default(false)
 );
 
--- TODO: cliente, entrada, detalle_entrada, salida, detalle_salida, pedido, detalle_pedido, estado, notificacion y segmento
+create table entrada(
+	id int primary key auto_increment not null,
+	fecha datetime not null,
+	observacion text,
+);
+
+create table detalle_entrada(
+	id int primary key auto_increment not null,
+	cantidad int not null,
+	entrada int not null, --fk
+	producto int not null, --fk
+);
+
+-- TODO: entrada, detalle_entrada, salida, detalle_salida, pedido, detalle_pedido, estado, notificacion y segmento
 
 -- TODO: restricciones
