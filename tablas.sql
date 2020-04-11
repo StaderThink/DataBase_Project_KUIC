@@ -1,5 +1,7 @@
 create database aurelia;
 
+-- tablas
+
 create table producto(
 	id int primary key auto_increment not null,
 	nombre text not null,
@@ -47,7 +49,7 @@ create table cargo(
 	id int primary key auto_increment not null,
 	nombre text not null,
 	pedidos boolean not null default(false),
-	usuario boolean not null default(false),
+	usuarios boolean not null default(false),
 	logistica boolean not null default(false),
 	clientes boolean not null default(false),
 	solicitar boolean not null default(false)
@@ -75,22 +77,22 @@ create table entrada(
 create table detalle_entrada(
 	id int primary key auto_increment not null,
 	cantidad int not null,
-	entrada int not null, --fk
-	producto int not null, --fk
+	entrada int not null, -- fk
+	producto int not null, -- fk
 );
 
 create table salida(
 	id int primary key auto_increment not null,
 	fecha datetime not null,
 	observacion text,
-	pedido int not null, --fk 
+	pedido int not null, -- fk 
 );
 
-create table detalle_salida (
+create table detalle_salida(
 	id int primary key auto_increment not null,
 	cantidad int not null,
-	salida int not null, --fk
-	producto int not null, --fk
+	salida int not null, -- fk
+	producto int not null, -- fk
 );
 
 create table pedido(
@@ -99,16 +101,16 @@ create table pedido(
 	cancelado bit, 
 	descuento double not null,
 	observacion text,
-	cliente int not null, --fk
-	asesor int not null, --fk usuario
-	estado int not null, --fk 
+	cliente int not null, -- fk
+	asesor int not null, -- fk
+	estado int not null, -- fk 
 );
 
 create table detalle_pedido(
 	id int primary key auto_increment not null,
 	cantidad int not null, 
-	pedido int not null, --fk
-	producto int not null, --fk
+	pedido int not null, -- fk
+	producto int not null, -- fk
 );
 
 create table estado(
@@ -123,14 +125,15 @@ create table notificacion(
 	texto text not null,
 	fecha_inicio datetime not null,
 	fecha_fin datetime,
-	autor int , --fk
+	autor int , -- fk
 );
 
 create table segmento(
 	id int primary key auto_increment not null,
-	notificacion int not null, --fk
-	cargo int not null, --fk 
+	notificacion int not null, -- fk
+	cargo int not null, -- fk 
 );
 
+-- restricciones
 
--- FALTA: restricciones
+-- TODO
