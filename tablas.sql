@@ -12,7 +12,7 @@ create table producto(
 	min_peso double not null,
 	max_peso double not null,
 	magnitud enum('kg', 'gr', 'lb') not null,
-	presentacion enum('') not null, -- TODO
+	presentacion enum('bandeja', 'granel', 'caja', 'bolsa') not null, -- TODO
 	categoria int not null-- fk
 );
 
@@ -37,7 +37,7 @@ create table usuario(
 	expedicion date not null,
 	correo text not null,
 	clave text not null,
-	cargo int , -- fk
+	cargo int not null, -- fk
 	telefono varchar(10) not null,
 	nacimiento date not null,
 	creado date not null default(curdate()),
@@ -125,7 +125,7 @@ create table notificacion(
 	texto text not null,
 	fecha_inicio datetime not null,
 	fecha_fin datetime,
-	autor int , -- fk
+	autor int not null, -- fk
 );
 
 create table segmento(
@@ -135,5 +135,35 @@ create table segmento(
 );
 
 -- restricciones
+
+alter table producto add constraint uq_codigo unique(codigo);
+alter table producto add foreign key (categoria) references categoria(id);
+
+alter table existencia add foreign key(producto) references producto(id);
+
+alter table usuario add constraint uq_documento unique(documento);
+alter table usuario add foreign key (cargo) references cargo(id);
+
+alter table cliente add constraint uq_rut unique(rut);
+
+alter table detalle_entrada add foreign key (entrada) references entrada(id);
+alter table detalle_entrada add foreign key (producto) references producto(id);
+
+alter table salida add foreign key (pedido) references pedido(id);
+
+alter table detalle_salida add foreign key (salida) references salida(id);
+alter table detalle_salida add foreign key (producto) references producto(id);
+
+alter table pedido add foreign key (cliente) references cliente(id);
+alter table pedido add foreign key (asesor) references usuario(id);
+alter table pedido add foreign key (estado) references estado(id);
+
+alter table detalle_pedido add foreign key (pedido) references pedido(id);
+alter table detalle_pedido add foreign key (producto) references producto(id);
+
+alter table notificacion add foreign key (autor) references usuario(id);
+
+alter table segmento add foreign key (notificacion) references notificacion(id);
+alter table segmento add foreign key (cargo) references cargo(id);
 
 -- TODO
