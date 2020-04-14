@@ -24,7 +24,7 @@ create table categoria(
 
 create table existencia(
 	id int primary key auto_increment not null,
-	producto int not null, -- fk
+	producto int not null, -- fk uq
 	cantidad int not null
 );
 
@@ -71,28 +71,28 @@ create table cliente(
 create table entrada(
 	id int primary key auto_increment not null,
 	fecha datetime not null,
-	observacion text,
+	observacion text
 );
 
 create table detalle_entrada(
 	id int primary key auto_increment not null,
 	cantidad int not null,
 	entrada int not null, -- fk
-	producto int not null, -- fk
+	producto int not null -- fk
 );
 
 create table salida(
 	id int primary key auto_increment not null,
 	fecha datetime not null,
 	observacion text,
-	pedido int not null, -- fk 
+	pedido int not null -- fk 
 );
 
 create table detalle_salida(
 	id int primary key auto_increment not null,
 	cantidad int not null,
 	salida int not null, -- fk
-	producto int not null, -- fk
+	producto int not null -- fk
 );
 
 create table pedido(
@@ -103,14 +103,14 @@ create table pedido(
 	observacion text,
 	cliente int not null, -- fk
 	asesor int not null, -- fk
-	estado int not null, -- fk 
+	estado int not null -- fk 
 );
 
 create table detalle_pedido(
 	id int primary key auto_increment not null,
 	cantidad int not null, 
 	pedido int not null, -- fk
-	producto int not null, -- fk
+	producto int not null -- fk
 );
 
 create table estado(
@@ -125,13 +125,13 @@ create table notificacion(
 	texto text not null,
 	fecha_inicio datetime not null,
 	fecha_fin datetime,
-	autor int not null, -- fk
+	autor int not null -- fk
 );
 
 create table segmento(
 	id int primary key auto_increment not null,
 	notificacion int not null, -- fk
-	cargo int not null, -- fk 
+	cargo int not null -- fk 
 );
 
 -- restricciones
@@ -140,6 +140,7 @@ alter table producto add constraint uq_codigo unique(codigo);
 alter table producto add foreign key (categoria) references categoria(id);
 
 alter table existencia add foreign key(producto) references producto(id);
+alter table existencia add constraint uq_producto unique(producto);
 
 alter table usuario add constraint uq_documento unique(documento);
 alter table usuario add foreign key (cargo) references cargo(id);
@@ -165,5 +166,3 @@ alter table notificacion add foreign key (autor) references usuario(id);
 
 alter table segmento add foreign key (notificacion) references notificacion(id);
 alter table segmento add foreign key (cargo) references cargo(id);
-
--- TODO

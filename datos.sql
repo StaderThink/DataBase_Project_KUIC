@@ -6,9 +6,11 @@ values ('programador', true, true, true, true, true);
 -- usuario
 
 call crear_usuario(
-	'andres camilo', 'celis pacheco', '1000383837', 'CC', '22-09-2019',
-	'accelis73@misena.edu.co', 'accelis', 1, '3194028018', '22-09-2001'
+	'andres camilo', 'celis pacheco', '1000383837', 'CC', '2019-09-22',
+	'accelis73@misena.edu.co', 'accelis', 1, '3194028018', '2001-09-22'
 );
+
+-- TODO colocar sus datos
 
 -- estado
 
