@@ -13,7 +13,7 @@ begin
 	)
 	values (
 		lower($nombre), lower($apellido), $documento, $tipo_documento, $expedicion,
-		lower($correo), md5($clave), $cargo, $telefono, $nacimiento, false
+		lower($correo), $clave, $cargo, $telefono, $nacimiento, false
 	);
 end$$
 
