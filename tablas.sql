@@ -12,7 +12,7 @@ create table producto(
 	min_peso double not null,
 	max_peso double not null,
 	magnitud enum('kg', 'gr', 'lb') not null,
-	presentacion enum('bandeja', 'granel', 'caja', 'bolsa') not null, -- TODO
+	presentacion enum('bandeja', 'granel', 'caja', 'bolsa') not null,
 	categoria int not null-- fk
 );
 
