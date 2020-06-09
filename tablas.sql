@@ -1,19 +1,21 @@
 create database aurelia;
 
+use aurelia;
+
 -- tablas
 
 create table producto(
 	id int primary key auto_increment not null,
 	nombre text not null,
 	descripcion text,
-	codigo varchar(5), -- uq
+	codigo varchar(5) not null, -- uq
 	precio double not null,
 	min_cantidad int not null,
 	min_peso double not null,
 	max_peso double not null,
 	magnitud enum('kg', 'gr', 'lb') not null,
-	presentacion enum('bandeja', 'granel', 'caja', 'bolsa') not null,
-	categoria int not null-- fk
+	presentacion enum('bandeja', 'granel', 'caja', 'bolsa', 'paquete') not null,
+	categoria int not null -- fk
 );
 
 create table categoria(
@@ -63,14 +65,14 @@ create table cliente(
 	correo text not null,
 	direccion text not null,
 	telefono varchar(10) not null,
-	creado date not null,
-	actualizado date not null,
+	creado date not null default(curdate()),
+	actualizado date not null default(curdate()),
 	activo boolean not null default(false)
 );
 
 create table entrada(
 	id int primary key auto_increment not null,
-	fecha datetime not null,
+	fecha datetime not null default(curdate()),
 	observacion text
 );
 
@@ -83,7 +85,7 @@ create table detalle_entrada(
 
 create table salida(
 	id int primary key auto_increment not null,
-	fecha datetime not null,
+	fecha datetime not null default(curdate()),
 	observacion text,
 	pedido int not null -- fk 
 );
@@ -97,7 +99,7 @@ create table detalle_salida(
 
 create table pedido(
 	id int primary key auto_increment not null,
-	fecha datetime not null,
+	fecha datetime not null default(curdate()),
 	cancelado bit, 
 	descuento double not null,
 	observacion text,
@@ -123,7 +125,7 @@ create table estado(
 create table notificacion(
 	id int primary key auto_increment not null,
 	texto text not null,
-	fecha_inicio datetime not null,
+	fecha_inicio datetime not null default(curdate()),
 	fecha_fin datetime,
 	autor int not null -- fk
 );
