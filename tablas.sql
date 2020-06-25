@@ -87,7 +87,7 @@ create table salida(
 	id int primary key auto_increment not null,
 	fecha datetime not null default(curdate()),
 	observacion text,
-	pedido int not null -- fk 
+	pedido int -- fk 
 );
 
 create table detalle_salida(
