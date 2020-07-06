@@ -14,6 +14,7 @@ create table producto(
 	min_peso double not null,
 	max_peso double not null,
 	magnitud enum('kg', 'gr', 'lb') not null,
+	existencias int not null,
 	presentacion enum('bandeja', 'granel', 'caja', 'bolsa', 'paquete') not null,
 	categoria int not null -- fk
 );
@@ -22,12 +23,6 @@ create table categoria(
 	id int primary key auto_increment not null,
 	nombre text not null,
 	descripcion text
-);
-
-create table existencia(
-	id int primary key auto_increment not null,
-	producto int not null, -- fk uq
-	cantidad int not null
 );
 
 create table usuario(
@@ -100,12 +95,12 @@ create table detalle_salida(
 create table pedido(
 	id int primary key auto_increment not null,
 	fecha datetime not null default(curdate()),
-	cancelado bit, 
+	activo bit, 
 	descuento double not null,
 	observacion text,
+	estado enum('pendiente', 'autorizado', 'despachado', 'entregado') not null, 
 	cliente int not null, -- fk
-	asesor int not null, -- fk
-	estado int not null -- fk 
+	asesor int not null -- fk
 );
 
 create table detalle_pedido(
@@ -113,13 +108,6 @@ create table detalle_pedido(
 	cantidad int not null, 
 	pedido int not null, -- fk
 	producto int not null -- fk
-);
-
-create table estado(
-	id int primary key auto_increment not null,
-	nombre text not null,
-	orden tinyint not null,
-	cancelable bit not null
 );
 
 create table notificacion(
@@ -141,9 +129,6 @@ create table segmento(
 alter table producto add constraint uq_codigo unique(codigo);
 alter table producto add foreign key (categoria) references categoria(id);
 
-alter table existencia add foreign key(producto) references producto(id);
-alter table existencia add constraint uq_producto unique(producto);
-
 alter table usuario add constraint uq_documento unique(documento);
 alter table usuario add foreign key (cargo) references cargo(id);
 
@@ -159,7 +144,6 @@ alter table detalle_salida add foreign key (producto) references producto(id);
 
 alter table pedido add foreign key (cliente) references cliente(id);
 alter table pedido add foreign key (asesor) references usuario(id);
-alter table pedido add foreign key (estado) references estado(id);
 
 alter table detalle_pedido add foreign key (pedido) references pedido(id);
 alter table detalle_pedido add foreign key (producto) references producto(id);
