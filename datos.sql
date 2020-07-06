@@ -61,12 +61,3 @@ call crear_usuario('Leonora', 'Rangell', '6167305', 'CC', '2016-12-16', 'lrangel
 call crear_usuario('Son', 'Loines', '1802947', 'CC', '2002-04-07', 'sloines1b@macromedia.com', 'wycsDb', 2, '3219034764', '1978-12-28');
 call crear_usuario('Maurise', 'Leadbitter', '7168173', 'CC', '2011-09-09', 'mleadbitter1c@google.it', 'xGTKK0P6Pi', 4, '3055971443', '1971-04-12');
 call crear_usuario('Darcy', 'Langforth', '0610861', 'CC', '2012-11-10', 'dlangforth1d@fotki.com', '4ay7Oh', 4, '3573767061', '1978-01-18');
-
--- estado
-
-call crear_estado('pendiente', 1, true);
-call crear_estado('registrado', 2, true);
-call crear_estado('empacado', 3, true);
-call crear_estado('enviado', 4, false);
-call crear_estado('en despacho', 4,false);
-call crear_estado('entregado', 6, false);
