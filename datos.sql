@@ -1,12 +1,14 @@
+use aurelia;
+
 -- cargo
 
 insert into cargo (nombre, pedidos, usuarios, logistica, clientes, solicitar)
 values
-	('programador', true, true, true, true, true),
-	('gerente', false, true, false, true, false),
-	('supervisor', true, false, false, false, false),
-	('inventarista', false, false, true, false, false),
-	('asesor', false, false, false, false, true);
+    ('programador', true, true, true, true, true),
+    ('gerente', false, true, false, true, false),
+    ('supervisor', true, false, false, false, false),
+    ('inventarista', false, false, true, false, false),
+    ('asesor', false, false, false, false, true);
 
 -- usuario
 
