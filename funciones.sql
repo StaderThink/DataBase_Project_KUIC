@@ -19,3 +19,9 @@ begin
         lower(correo), clave, cargo, telefono, nacimiento, false
     );
 end//
+
+create event desactivar_notificacion
+on schedule
+	every 1 second
+do
+	delete from notificacion where fecha_fin <= now();
