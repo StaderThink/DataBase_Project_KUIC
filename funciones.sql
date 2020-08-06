@@ -7,7 +7,7 @@ use aurelia//
 
 create procedure crear_usuario (
     nombre text, apellido text, documento varchar(10), tipo_documento text,
-    expedicion date, correo text, clave text, cargo int, telefono varchar(10), nacimiento date
+    nacimiento date, expedicion date, correo text, clave text, cargo int, telefono varchar(10)
 )
 begin
     insert into usuario(
@@ -16,9 +16,11 @@ begin
     )
     values (
         lower(nombre), lower(apellido), documento, tipo_documento, expedicion,
-        lower(correo), clave, cargo, telefono, nacimiento, false
+        lower(correo), clave, cargo, telefono, nacimiento, true
     );
 end//
+
+-- desactivar notificaciones
 
 create event desactivar_notificacion
 on schedule
