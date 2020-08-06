@@ -25,3 +25,19 @@ on schedule
 	every 1 second
 do
 	delete from notificacion where fecha_fin <= now();
+
+-- Evento de desactivación cliente
+
+CREATE EVENT desactivar_cliente
+	ON SCHEDULE 
+		EVERY 2 Hour
+        DO
+UPDATE cliente SET
+	cliente.activo = false
+   WHERE NOT EXISTS(
+   SELECT fecha FROM pedido
+       WHERE 
+       fecha >= CURRENT_TIMESTAMP - INTERVAL 3 MONTH AND
+       pedido.cliente = cliente.id
+    ORDER BY pedido.fecha
+   );
