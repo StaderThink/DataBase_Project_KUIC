@@ -115,7 +115,7 @@ create table notificacion(
     texto text not null,
     fecha_inicio datetime not null default(curdate()),
     fecha_fin datetime,
-    autor int not null -- fk
+    autor int -- fk
 );
 
 create table segmento(

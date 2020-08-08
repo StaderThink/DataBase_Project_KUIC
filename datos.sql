@@ -6,13 +6,13 @@ insert into cargo (nombre, pedidos, usuarios, logistica, clientes, solicitar)
 values
     ('programador', true, true, true, true, true),
     ('gerente', false, true, false, true, false),
-    ('supervisor', true, false, false, false, false),
+    ('supervisor', true, false, false, true, false),
     ('inventarista', false, false, true, false, false),
     ('asesor', false, false, false, false, true);
 
 -- usuario
 
-call crear_usuario('andres camilo', 'celis pacheco', '1000383837', 'CC', '2001-09-22', '2019-09-22', 'accelis73@misena.edu.co', 'accelis', 1, '3194028018');
+call crear_usuario('andres', 'celis', '1000383837', 'CC', '2001-09-22', '2019-09-22', 'accelis73@misena.edu.co', 'accelis', 1, '3194028018');
 call crear_usuario('Allina', 'Thatcher', '2576191', 'CC', '2001-09-22', '2012-12-12', 'athatcher0@netlog.com', 'lwJA7udScoz', 3, '3568696119');
 call crear_usuario('Josefa', 'Goddertsf', '8631085', 'CC', '2001-09-22', '2004-02-12', 'jgoddertsf1@bravesites.com', '9kmIm2GF', 4,'3613237975');
 call crear_usuario('Byrom', 'Baudic', '4180806', 'CC', '2001-09-22', '2010-03-25', 'bbaudic2@angelfire.com', '2Qnk7WJII', 3, '3800648467');
