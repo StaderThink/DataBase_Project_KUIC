@@ -63,3 +63,30 @@ begin
         where cargo.clientes = true or cargo.solicitar = true;
     end if;
 end//
+
+-- notifica la falta de existencias
+
+create event notificar_reduccion_existencias
+on schedule every 1 day do
+begin
+    insert into notificacion(autor, fecha_inicio, fecha_fin, texto)
+    select
+        null as autor,
+        curdate() as fecha_inicio,
+        curdate() + interval 1 day as fecha_fin,
+        concat('El producto "', producto.nombre, '" con codigo #', producto.codigo, ' tiene menos del 30% en existencias') as texto from producto
+    inner join (
+        -- obtener el promedio de la cantidad de entrada
+        select detalle_entrada.id as producto, avg(detalle_entrada.cantidad) as cantidad
+        from detalle_entrada
+        group by detalle_entrada.producto
+    )
+    as detalle on detalle.producto = producto.id
+    where producto.existencias < (detalle.cantidad * 0.3); -- colocar un umbral del 30%
+
+    select id into @notificacion from notificacion order by notificacion.id desc limit 0, 1;
+
+    insert into segmento(notificacion, cargo)
+    select @notificacion as notificacion, cargo.id as cargo from cargo
+    where cargo.logistica = true
+end//
