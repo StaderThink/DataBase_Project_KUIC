@@ -24,9 +24,10 @@ end//
 
 create event desactivar_notificacion
 on schedule
-	every 1 second
+	every 1 hour
 do
-	delete from notificacion where fecha_fin <= now();
+    delete from notificacion where fecha_fin <= curdate();
+//
 
 -- evento de desactivación cliente
 
@@ -41,6 +42,7 @@ CREATE EVENT desactivar_cliente
             pedido.cliente = cliente.id
         ORDER BY pedido.fecha
     );
+//
 
 -- notificar inactivación
 
@@ -88,5 +90,7 @@ begin
 
     insert into segmento(notificacion, cargo)
     select @notificacion as notificacion, cargo.id as cargo from cargo
-    where cargo.logistica = true
+    where cargo.logistica = true;
 end//
+
+-- para usar en mysqlshell, colocal el comando: delimiter ;
