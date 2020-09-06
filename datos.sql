@@ -7,7 +7,7 @@ values
     ('administrador', true, true, true, true, true),
     ('gerente', false, true, false, true, false),
     ('supervisor', true, false, false, true, false),
-    ('coordinador logístico', false, false, true, false, false),
+    ('coordinador logistico', false, false, true, false, false),
     ('asesor', false, false, false, false, true);
 
 -- usuario
