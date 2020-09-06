@@ -7,9 +7,9 @@ values
     ('administrador', true, true, true, true, true),
     ('gerente', false, true, false, true, false),
     ('supervisor', true, false, false, true, false),
-    ('inventarista', false, false, true, false, false),
+    ('coordinador logístico', false, false, true, false, false),
     ('asesor', false, false, false, false, true);
 
 -- usuario
 
-call crear_usuario('administrador', '', '0000', 'CC', '2019-01-01', '2019-01-01', 'aureliaproyecto@gmail.com', 'JfMtst71', 1, '0000');
+call crear_usuario('administrador', '', '0000000', 'CC', '2019-01-01', '2019-01-01', 'aureliaproyecto@gmail.com', 'JfMtst71', 1, '0000');
