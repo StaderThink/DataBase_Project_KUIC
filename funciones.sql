@@ -26,8 +26,13 @@ create event desactivar_notificacion
 on schedule
 	every 1 hour
 do
-    delete from notificacion where fecha_fin <= curdate();
-//
+begin
+    -- eliminar los segmentos y notificaciones
+
+    delete notificacion, segmento from segmento
+    inner join notificacion on segmento.notificacion = notificacion.id
+    where notificacion.fecha_fin <= current_date;
+end//
 
 -- evento de desactivación cliente
 
@@ -52,7 +57,7 @@ for each row
 begin
     if new.activo = false then
         insert into notificacion(autor, fecha_inicio, fecha_fin, texto)
-        values (null, curdate(), curdate() +  interval 2 day, concat('El cliente "', new.nombre, '" ha sido desactivado'));
+        values (null, current_date, current_date +  interval 2 day, concat('El cliente "', new.nombre, '" ha sido desactivado'));
 
         -- obtener el id de la notificacion
 
@@ -74,8 +79,8 @@ begin
     insert into notificacion(autor, fecha_inicio, fecha_fin, texto)
     select
         null as autor,
-        curdate() as fecha_inicio,
-        curdate() + interval 1 day as fecha_fin,
+        current_date as fecha_inicio,
+        current_date + interval 1 day as fecha_fin,
         concat('El producto "', producto.nombre, '" con codigo #', producto.codigo, ' tiene menos del 30% en existencias') as texto from producto
     inner join (
         -- obtener el promedio de la cantidad de entrada

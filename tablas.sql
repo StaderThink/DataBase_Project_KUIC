@@ -14,7 +14,7 @@ create table producto(
     min_peso double not null,
     max_peso double not null,
     magnitud enum('kg', 'gr', 'lb') not null,
-    existencias int not null,
+    existencias int not null default(0),
     presentacion enum('bandeja', 'granel', 'caja', 'bolsa', 'paquete') not null,
     categoria int not null -- fk
 );
@@ -37,8 +37,8 @@ create table usuario(
     cargo int not null, -- fk
     telefono varchar(10) not null,
     nacimiento date not null,
-    creado date not null default(curdate()),
-    actualizado date not null default(curdate()),
+    creado date not null default(current_date),
+    actualizado date not null default(current_date),
     activo boolean not null default(false)
 );
 
@@ -60,14 +60,14 @@ create table cliente(
     correo text not null,
     direccion text not null,
     telefono varchar(10) not null,
-    creado date not null default(curdate()),
-    actualizado date not null default(curdate()),
+    creado date not null default(current_date),
+    actualizado date not null default(current_date),
     activo boolean not null default(false)
 );
 
 create table entrada(
     id int primary key auto_increment not null,
-    fecha datetime not null default(curdate()),
+    fecha datetime not null default(now()),
     observacion text
 );
 
@@ -80,7 +80,7 @@ create table detalle_entrada(
 
 create table salida(
     id int primary key auto_increment not null,
-    fecha datetime not null default(curdate()),
+    fecha datetime not null default(now()),
     observacion text,
     pedido int -- fk 
 );
@@ -94,7 +94,7 @@ create table detalle_salida(
 
 create table pedido(
     id int primary key auto_increment not null,
-    fecha datetime not null default(curdate()),
+    fecha datetime not null default(now()),
     activo bit, 
     descuento double not null,
     observacion text,
@@ -113,7 +113,7 @@ create table detalle_pedido(
 create table notificacion(
     id int primary key auto_increment not null,
     texto text not null,
-    fecha_inicio datetime not null default(curdate()),
+    fecha_inicio datetime not null default(now()),
     fecha_fin datetime,
     autor int -- fk
 );

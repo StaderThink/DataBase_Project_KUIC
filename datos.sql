@@ -12,4 +12,4 @@ values
 
 -- usuario
 
-call crear_usuario('administrador', '', '0000000', 'CC', '2019-01-01', '2019-01-01', 'aureliaproyecto@gmail.com', 'JfMtst71', 1, '0000');
+call crear_usuario('administrador', '', '0000000', 'CC', '2019-01-01', '2019-01-01', 'aureliaproyecto@gmail.com', 'JfMtst71', 1, '0000000');
