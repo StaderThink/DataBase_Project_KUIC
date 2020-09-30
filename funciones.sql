@@ -27,8 +27,13 @@ on schedule
 	every 1 hour
 do
 begin
-    -- eliminar los segmentos y notificaciones
-
+    -- eliminar las notificaciones
+    
+    delete from notificacion
+    where notificacion.fecha_fin <= current_date;
+    
+    -- eliminar segmentos
+    
     delete notificacion, segmento from segmento
     inner join notificacion on segmento.notificacion = notificacion.id
     where notificacion.fecha_fin <= current_date;
